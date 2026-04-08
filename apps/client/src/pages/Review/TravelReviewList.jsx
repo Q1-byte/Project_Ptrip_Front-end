@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../api';
+import api, { normalizeImageUrl } from '../../api';
 import './TravelReviewList.css';
 
 const NO_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 100'%3E%3Crect fill='%23f0f0f0' width='150' height='100'/%3E%3Ctext fill='%23bbb' font-family='sans-serif' font-size='11' x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle'%3ENo Image%3C/text%3E%3C/svg%3E";
@@ -40,7 +40,7 @@ const TravelReviewList = () => {
                         <div key={review.id} className="review-item" onClick={() => navigate(`/reviews/${review.id}`)}>
                             <div className="review-thumbnail">
                                 <img
-                                    src={review.thumbnailUrl || NO_IMG}
+                                    src={normalizeImageUrl(review.thumbnailUrl) || NO_IMG}
                                     alt="썸네일"
                                     loading="lazy"
                                     onError={(e) => { e.target.src = NO_IMG; }}
