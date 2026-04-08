@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './PlanResult.css';
-import api from '../../api';
+import api, { normalizeImageUrl } from '../../api';
 import { useAuth } from '../../context/AuthContext';
 
 
@@ -495,7 +495,7 @@ const PlanResult = () => {
                             {accommodation && (
                                 <div className="product-card">
                                     <div className="product-label">숙소</div>
-                                    <img className="product-img" src={accommodation.imageUrl} alt={accommodation.name} />
+                                    <img className="product-img" src={normalizeImageUrl(accommodation.imageUrl)} alt={accommodation.name} />
                                     <div className="product-body">
                                         <h4>{accommodation.name}</h4>
                                         <div className="product-price">{accomTotal.toLocaleString()}원</div>
@@ -505,7 +505,7 @@ const PlanResult = () => {
                             {activity && (
                                 <div className="product-card">
                                     <div className="product-label">액티비티</div>
-                                    <img className="product-img" src={activity.imageUrl} alt={activity.name} />
+                                    <img className="product-img" src={normalizeImageUrl(activity.imageUrl)} alt={activity.name} />
                                     <div className="product-body">
                                         <h4>{activity.name}</h4>
                                         <div className="product-price">{activityTotal.toLocaleString()}원</div>
@@ -515,7 +515,7 @@ const PlanResult = () => {
                             {ticket && (
                                 <div className="product-card">
                                     <div className="product-label">티켓</div>
-                                    <img className="product-img" src={ticket.imageUrl} alt={ticket.name} />
+                                    <img className="product-img" src={normalizeImageUrl(ticket.imageUrl)} alt={ticket.name} />
                                     <div className="product-body">
                                         <h4>{ticket.name}</h4>
                                         <div className="product-price">{ticketTotal.toLocaleString()}원</div>

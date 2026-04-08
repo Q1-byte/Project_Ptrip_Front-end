@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import api from '../../api';
+import api, { normalizeImageUrl } from '../../api';
 import './TravelReviewWrite.css';
 
 const TravelReviewEdit = () => {
@@ -158,7 +158,7 @@ const TravelReviewEdit = () => {
                             {images.map((img, index) => (
                                 <div key={index} className="preview-card">
                                     <button type="button" className="delete-preview-btn" onClick={() => handleRemoveImage(index)}>×</button>
-                                    <img src={img.storedUrl} className="preview-item" alt={img.originName || 'preview'} />
+                                    <img src={normalizeImageUrl(img.storedUrl)} className="preview-item" alt={img.originName || 'preview'} />
                                     <span className="preview-filename">{img.originName}</span>
                                 </div>
                             ))}

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getSpots, createSpot, deleteSpot, toggleSpot } from '../../../api/spotApi';
-import api from '../../../api/axiosConfig';
+import api, { normalizeImageUrl } from '../../../api/axiosConfig';
 
 const EMPTY_FORM = {
   name: '', address: '', category: '관광', description: '',
@@ -177,7 +177,7 @@ function SpotList() {
                 <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
                   <div style={{ width: '120px', height: '90px', border: '2px dashed #ddd', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: 'white', flexShrink: 0 }}>
                     {formData.imageUrl
-                      ? <img src={formData.imageUrl} alt="미리보기" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; }} />
+                      ? <img src={normalizeImageUrl(formData.imageUrl)} alt="미리보기" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; }} />
                       : <span style={{ fontSize: '12px', color: '#aaa', textAlign: 'center', padding: '8px' }}>미리보기</span>}
                   </div>
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -265,7 +265,7 @@ function SpotList() {
                       <td>{spot.id}</td>
                       <td>
                         {spot.imageUrl
-                          ? <img src={spot.imageUrl} alt="" style={{ width: '48px', height: '36px', objectFit: 'cover', borderRadius: '4px' }} />
+                          ? <img src={normalizeImageUrl(spot.imageUrl)} alt="" style={{ width: '48px', height: '36px', objectFit: 'cover', borderRadius: '4px' }} />
                           : <span style={{ fontSize: '11px', color: '#aaa' }}>없음</span>}
                       </td>
                       <td><strong>{spot.name}</strong></td>

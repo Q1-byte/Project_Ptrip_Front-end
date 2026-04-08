@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import api from '../../api';
+import api, { normalizeImageUrl } from '../../api';
 import './TravelReviewDetail.css';
 
 // 외부 플레이스홀더 서비스 대신 로컬 SVG 사용
@@ -160,7 +160,7 @@ const TravelReviewDetail = () => {
                 {sorted.map((img, i) => (
                     <div key={i} className="attachment-item">
                         <img
-                            src={img.storedUrl}
+                            src={normalizeImageUrl(img.storedUrl)}
                             alt={img.originName || `이미지 ${i + 1}`}
                             onError={(e) => { e.target.src = NO_IMG; }}
                         />

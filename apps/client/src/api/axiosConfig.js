@@ -39,4 +39,12 @@ api.interceptors.response.use(
   }
 );
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+
+export const normalizeImageUrl = (url) => {
+  if (!url || !url.startsWith('http://')) return url;
+  if (!API_BASE.startsWith('https://')) return url;
+  return url.replace(/^http:\/\/[^/]+/, API_BASE);
+};
+
 export default api;
