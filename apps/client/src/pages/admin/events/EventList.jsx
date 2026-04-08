@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import api from '../../../api/axiosConfig';
+import api, { normalizeImageUrl } from '../../../api/axiosConfig';
 import { getEvents, createEvent, deleteEvent } from '../../../api/eventApi';
 
 const EMPTY_FORM = {
@@ -161,7 +161,7 @@ function EventList() {
                 <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
                   <div style={{ width: '120px', height: '90px', border: '2px dashed #ddd', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#f8f9fa', flexShrink: 0 }}>
                     {formData.imageUrl
-                      ? <img src={formData.imageUrl} alt="미리보기" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; }} />
+                      ? <img src={normalizeImageUrl(formData.imageUrl)} alt="미리보기" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { e.target.style.display = 'none'; }} />
                       : <span style={{ fontSize: '12px', color: '#aaa', textAlign: 'center', padding: '8px' }}>미리보기</span>}
                   </div>
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -219,7 +219,7 @@ function EventList() {
                       <td>{event.id}</td>
                       <td>
                         {event.imageUrl
-                          ? <img src={event.imageUrl} alt="" style={{ width: '48px', height: '36px', objectFit: 'cover', borderRadius: '4px' }} />
+                          ? <img src={normalizeImageUrl(event.imageUrl)} alt="" style={{ width: '48px', height: '36px', objectFit: 'cover', borderRadius: '4px' }} />
                           : <span style={{ fontSize: '11px', color: '#aaa' }}>없음</span>}
                       </td>
                       <td><strong>{event.name}</strong></td>
